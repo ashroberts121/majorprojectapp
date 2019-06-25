@@ -1,0 +1,49 @@
+/*********************************** MAIN CSS STYLESHEET******************************************/
+
+/************  HEAD.PHP  ***********/
+
+#headerLogoBar {
+  height: 20px;
+  background-color: #808080;
+  /* box-shadow: 0px 8px 6px #D4D4D4; */
+  z-index: 1;
+}
+
+#headerLogoBar p {
+  color: #D4D4D4;
+  font-family: Ariel;
+  text-align: center;
+}
+
+/************  END OF HEAD.PHP  ***********/
+
+
+/************  NAV.PHP  ***********/
+
+#navbarBottom {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #D4D4D4;
+}
+
+#navbarBottom div.col-2 {
+  text-align: center;
+  padding: 10px 0;
+}
+
+#navbarBottom div.col-2:hover {
+  background-color: #639EFB;
+}
+
+#navbarBottom div.col-2 p {
+  text-align: center;
+  font-size: 12px;
+  margin: 0;
+}
+
+#navbarBottom div.col-1 {
+  padding: 0;
+}
+
+/************  END OF NAV.PHP  ***********/

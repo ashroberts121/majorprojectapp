@@ -13,7 +13,7 @@
   if(!$conn){
       die("Error connecting to SQL Database: 'MajorProjectApp'");
   }else{
-      echo "Connected Successfully to Database <br />";
+    //  echo "Connected Successfully to Database <br/>";
   }
 
   //Run session
