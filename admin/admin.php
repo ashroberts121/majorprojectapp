@@ -19,10 +19,12 @@
   //Run session
   session_start();
 
-  //Attach root to DIR variable
+  //Attach root to DIR and $DIR variable
   define('DIR', 'http://localhost/MajorProjectApp/');
-  //Attach admin to DIR_ADMIN variable
+  $DIR = 'http://localhost/MajorProjectApp';
+  //Attach admin to DIR_ADMIN and $DIR_ADMIN variable
   define('DIR_ADMIN', 'http://localhost/MajorProjectApp/admin/');
+  $DIR_ADMIN = 'http://localhost/MajorProjectApp/admin/';
 
   define('SITE_TITLE', 'MajorProjectApp'); //Site title
 
