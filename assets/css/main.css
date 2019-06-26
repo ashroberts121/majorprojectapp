@@ -29,8 +29,8 @@
   padding: 0;
 }
 
-#headerLogoBar img {
-  margin-left: 43.5%;
+#headerLogoBar div {
+  text-align: center;
 }
 
 /************  END OF HEAD.PHP  ***********/
@@ -147,5 +147,51 @@
 }
 
 /************  END OF HOME.PHP  ***********/
+
+/********************************************************************************************/
+
+/*************** GROUPS.PHP  **************/
+
+#groupsTabs {
+  border-radius: 0;
+  margin-bottom: 10px;
+}
+
+#groupsTabs a {
+  padding: 10px 0 0 0;
+  text-align: center;
+  color: #639EFB;
+  height:40px;
+}
+
+#groupsGroupCard {
+  height: auto;
+  text-align: center;
+  margin: 0;
+}
+
+#groupsGroupCard div {
+  display: inline-block;
+  position: absolute;
+  top: 20%;
+}
+
+#groupsGroupCard div h4 {
+  color: white;
+  text-shadow: 1px 1px 1px grey;
+}
+
+#groupsGroupCard div p {
+  color: white;
+  text-shadow: 1px 1px 1px grey;
+}
+
+ #groupsGroupCard div button{
+  background-color: #639EFB;
+  border-radius: 0;
+  border: 0;
+}
+
+/************  END OF GROUPS.PHP  ***********/
 
 /********************************************************************************************/

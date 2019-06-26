@@ -1,6 +1,6 @@
 <?php
 
-  $activePage = 'explore'; //Sets active page variable for navbar
+  $activePage = 'login'; //Sets active page variable for navbar
 
   include('../admin/admin.php');//Call in admin for db connection
   include('../controller/head.php');//Call in head.php for head tags
