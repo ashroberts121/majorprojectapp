@@ -41,7 +41,7 @@
         </div>
         <div class="btn-toolbar justify-content-between">
           <div class="btn-group">
-            <button id="removeRoundCorners" type="submit" class="btn btn-primary">share</button>
+            <button id="customButton" type="submit" class="btn btn-primary">share</button>
           </div>
         </div>
       </div>

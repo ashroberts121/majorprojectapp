@@ -9,11 +9,17 @@
 ?>
 
 <!-- Groups page tabs -->
-<div id="groupsTabs" class="nav nav-tabs" id="nav-tab" role="tablist">
-  <!-- All Groups Tab -->
-  <a class="nav-item nav-link active col-6" id="nav-home-tab" data-toggle="tab" href="#allGroupsTab" role="tab">All Groups</a>
-  <!-- My Groups Tab -->
-  <a class="nav-item nav-link col-6" id="nav-profile-tab" data-toggle="tab" href="#myGroupsTab" role="tab">My Groups</a>
+<div class="card-header border-bottom-0 bg-transparent">
+  <ul class="nav nav-tabs justify-content-center pt-1" role="tablist">
+    <!-- Login Tab -->
+    <li class="nav-item">
+      <a class="nav-link active text-primary" data-toggle="pill" href="#allGroupsTab" role="tab">All Groups</a>
+    </li>
+    <!-- Register Tab -->
+    <li class="nav-item">
+      <a class="nav-link text-primary" data-toggle="pill" href="#myGroupsTab" role="tab">My Groups</a>
+    </li>
+  </ul>
 </div>
 
 <!-- Tab content -->
@@ -22,6 +28,7 @@
   <!-- TAB 1 (All Groups), Content -->
   <div class="tab-pane fade show active" id="allGroupsTab" role="tabpanel">
 
+    <!-- Card -->
     <div class="card" id="groupsGroupCard">
       <img class="card-img-top" src="<?php echo DIR ?>assets/img/runner_woman.jpeg" alt="Card image cap" width="100%" height="auto">
       <div class="col-8 offset-2">
@@ -31,6 +38,7 @@
       </div>
     </div>
 
+    <!-- Card -->
     <div class="card" id="groupsGroupCard">
       <img class="card-img-top" src="<?php echo DIR ?>assets/img/yoga_woman.jpeg" alt="Card image cap" width="100%" height="auto">
       <div class="col-8 offset-2">
@@ -40,6 +48,7 @@
       </div>
     </div>
 
+    <!-- Card -->
     <div class="card" id="groupsGroupCard">
       <img class="card-img-top" src="<?php echo DIR ?>assets/img/bodybuilding_man.jpeg" alt="Card image cap" width="100%" height="auto">
       <div class="col-8 offset-2">
@@ -49,6 +58,7 @@
       </div>
     </div>
 
+    <!-- Card -->
     <div class="card" id="groupsGroupCard">
       <img class="card-img-top" src="<?php echo DIR ?>assets/img/weightloss_woman.jpeg" alt="Card image cap" width="100%" height="auto">
       <div class="col-8 offset-2">
@@ -64,6 +74,7 @@
   <!-- TAB 2 (My Groups), Content -->
   <div class="tab-pane fade" id="myGroupsTab" role="tabpanel">
 
+    <!-- Card -->
     <div class="card" id="groupsGroupCard">
       <img class="card-img-top" src="<?php echo DIR ?>assets/img/bodybuilding_man.jpeg" alt="Card image cap" width="100%" height="auto">
       <div class="col-8 offset-2">
@@ -73,6 +84,7 @@
       </div>
     </div>
 
+    <!-- Card -->
     <div class="card" id="groupsGroupCard">
       <img class="card-img-top" src="<?php echo DIR ?>assets/img/weightloss_woman.jpeg" alt="Card image cap" width="100%" height="auto">
       <div class="col-8 offset-2">
@@ -82,6 +94,7 @@
       </div>
     </div>
 
+    <!-- Card -->
     <div class="card" id="groupsGroupCard">
       <img class="card-img-top" src="<?php echo DIR ?>assets/img/runner_woman.jpeg" alt="Card image cap" width="100%" height="auto">
       <div class="col-8 offset-2">
@@ -91,6 +104,7 @@
       </div>
     </div>
 
+    <!-- Card -->
     <div class="card" id="groupsGroupCard">
       <img class="card-img-top" src="<?php echo DIR ?>assets/img/yoga_woman.jpeg" alt="Card image cap" width="100%" height="auto">
       <div class="col-8 offset-2">
@@ -104,3 +118,4 @@
   <!-- End of tab 2 content -->
 
 </div>
+<!-- End of tab content -->
