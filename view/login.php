@@ -2,7 +2,8 @@
 
   $activePage = 'login'; //Sets active page variable for navbar
 
-  include('../admin/admin.php');//Call in admin for db connection
+  include('../admin/config.php');//Call in config for db connection
+  include('../controller/functions.php');//Call in custom function file
   include('../model/head.php');//Call in head.php for head tags
   include('../view/nav.php');//Call in bottom navbar
 
@@ -31,7 +32,7 @@
 
         <!-- Login Tab Content -->
         <div class="tab-pane fade show active" id="loginLogin" role="tabpanel">
-          <form>
+          <form action="<?php echo DIR ?>controller/process_login.php">
             <!-- Email Input Field -->
             <div class="form-group">
               <input type="email" name="email" class="form-control" id="email" placeholder="Email" required autofocus>
@@ -86,7 +87,7 @@
             </div>
             <!-- Register Submit Form Button -->
             <div class="text-center pt-2 pb-1">
-              <button type="submit" id="customButton" class="btn btn-primary">Register</button>
+              <button type="submit" name="login" id="customButton" class="btn btn-primary">Register</button>
             </div>
           </form>
         </div>
