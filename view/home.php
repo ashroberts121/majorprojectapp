@@ -11,7 +11,7 @@
   <div class="row" id="pageContainer">
 
     <!---------------------------------------------- New Post Card -------------------------------------->
-    <div id="homeNewPostCard" class="card col-12">
+    <div id="homeNewPostCard" class="card col">
 
       <div class="card-header">
           <div class="d-flex justify-content-between align-items-center">

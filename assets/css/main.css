@@ -97,8 +97,8 @@
 
   /* Animation settings */
   animation-name: zoomOut;
-  animation-delay: 4s;
-  animation-duration: 4s;
+  animation-delay: 2s;
+  animation-duration: 2s;
 }
 
 /* CSS Zoomout Animation */
@@ -124,7 +124,8 @@
 #homeNewPostCard {
   border-radius: 0;
   padding: 0;
-  margin: 10px 0;
+  margin: 10px;
+  box-shadow: -1px 5px 20px #EFEFEF;
 }
 
 #homePostCard {

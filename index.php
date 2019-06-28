@@ -22,7 +22,7 @@
     var timer = setTimeout(
       function() {
         window.location= '<?php echo DIR; ?>view/home.php'
-      }, 6000);
+      }, 3000);
   </script>
 
 </div>
