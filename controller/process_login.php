@@ -2,10 +2,10 @@
 	include('../admin/config.php');
 	include('../controller/functions.php');//Call in custom function file
 
-	if(logged_in()){
-		header("Location: home.php");
-		exit();
-	}
+	// if(logged_in()){
+	// 	header("'Location:'.echo DIR.'view/home.php'");
+	// 	exit();
+	// }
 
     //Set variable for error display message
 	$errorCheckResult = "";
@@ -14,19 +14,19 @@
 	if(isset($_POST['login'])){
 
     //set form input values to variables and make sure it is a string
-		$firstName = mysqli_real_escape_string($conn, $_POST['firstname']);
-		$lastName = mysqli_real_escape_string($conn, $_POST['surname']);
+		$firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+		$surname = mysqli_real_escape_string($conn, $_POST['surname']);
 		$email = mysqli_real_escape_string($conn, $_POST['email']);
 		$password = mysqli_real_escape_string($conn, $_POST['password']);
 		$passwordConfirm = $_POST['passwordConfirm'];
 
         //Check first name is at least 3 letters
-		if(strlen($firstName) < 3){
+		if(strlen($firstname) < 3){
 			$errorCheckResult = "First name must be at least 3 characters long.";
 		}
-        //Check last name is at least 3 letters
-		else if(strlen($lastName) < 3){
-			$errorCheckResult = "Last name must be at least 3 characters long.";
+        //Check surname is at least 3 letters
+		else if(strlen($surname) < 3){
+			$errorCheckResult = "Surname must be at least 3 characters long.";
 		}
         //Check that email is a valid email format
 		else if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
@@ -45,14 +45,16 @@
 			$errorCheckResult = "Passwords do not match.";
 		}
 		else{
-
-            //encrypt password
+        //encrypt password
 			$password = password_hash($password, PASSWORD_DEFAULT);
 
-            //Create query - insert values from inputs into a new row in users table
-			$sql = "INSERT INTO users(id, firstName, lastName, email, password, token) VALUES (NULL, '$firstName', '$lastName', '$email', '$password', '')";
+        //Create query - insert values from inputs into a new row in users table
+			$sql = "INSERT INTO users(id, firstname, surname, email, password, token) VALUES (NULL, '$firstname', '$surname', '$email', '$password', '')";
 			if(mysqli_query($conn, $sql)){
 				$errorCheckResult = "Successfully registered!";
+
+        header("Location: ../view/login.php");
+        exit;
 			}
 		}
 	}

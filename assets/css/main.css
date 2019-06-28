@@ -227,6 +227,9 @@
 
 /***************  LOGIN.PHP  ***************/
 
+#errorCheckResult {
+  color: red;
+}
 
 /************  END OF LOGIN.PHP  ***********/
 
