@@ -3,7 +3,7 @@
   $activePage = 'profile'; //Sets active page variable for navbar
 
   include('../admin/admin.php');//Call in admin for db connection
-  include('../controller/head.php');//Call in head.php for head tags
+  include('../model/head.php');//Call in head.php for head tags
   include('../view/nav.php');//Call in bottom navbar
 
 ?>
@@ -102,7 +102,7 @@
 
     <!-- TAB 2 Content, Followed Competitions -->
     <div class="tab-pane fade" id="profileChallenges" role="tabpanel">
-      
+
       <!-- Card -->
       <div class="card" id="groupsGroupCard">
         <img class="card-img-top" src="<?php echo DIR ?>assets/img/bodybuilding_man.jpeg" alt="Card image cap" width="100%" height="auto">
@@ -150,3 +150,7 @@
   <!-- End of tab content -->
 
 </div>
+
+<?php
+  include('../model/footer.php');//Call in footer.php
+?>

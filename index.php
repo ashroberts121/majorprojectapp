@@ -1,6 +1,6 @@
 <?php
   include('admin/admin.php');//Call in admin for db connection
-  include('controller/head.php');//Call in head.php for head tags
+  include('model/head.php');//Call in head.php for head tags
 
 ?>
 
@@ -26,3 +26,7 @@
   </script>
 
 </div>
+
+<?php
+  include('../model/footer.php');//Call in footer.php
+?>
