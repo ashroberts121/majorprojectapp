@@ -11,7 +11,7 @@
 	$errorCheckResult = "";
 
     //check if submit button was pressed
-	if(isset($_POST['login'])){
+	if(isset($_POST['submit'])){
 
     //set form input values to variables and make sure it is a string
 		$firstname = mysqli_real_escape_string($conn, $_POST['firstname']);

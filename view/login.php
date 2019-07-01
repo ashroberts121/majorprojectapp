@@ -62,7 +62,7 @@
 
         <!-- Register Tab Content -->
         <div class="tab-pane fade" id="loginRegister" role="tabpanel">
-          <form action="<?php echo DIR ?>controller/process_login.php">
+          <form action="<?php echo DIR ?>controller/process_login.php" method="post">
             <!-- First Name Input Field -->
             <div class="form-group">
               <input type="text" name="firstname" id="firstname" class="form-control" placeholder="First Name" required autofocus>
@@ -91,7 +91,7 @@
             <p id="loginErrorCheck"><?php echo $errorCheckResult ?></p>
             <!-- Register Submit Form Button -->
             <div class="text-center pt-2 pb-1">
-              <button type="submit" name="login" id="customButton" class="btn btn-primary">Register</button>
+              <button type="submit" name="submit" id="customButton" class="btn btn-primary">Register</button>
             </div>
           </form>
         </div>
