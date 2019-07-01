@@ -32,7 +32,7 @@
 
         <!-- Login Tab Content -->
         <div class="tab-pane fade show active" id="loginLogin" role="tabpanel">
-          <form action="<?php echo DIR ?>controller/process_login.php">
+          <form action="<?php echo DIR ?>controller/process_login.php" method="post">
             <!-- Email Input Field -->
             <div class="form-group">
               <input type="email" name="email" class="form-control" id="email" placeholder="Email" required autofocus>
@@ -43,14 +43,12 @@
             </div>
             <!-- Keep Logged in Checkbox Field -->
             <div class="custom-control custom-checkbox">
-              <input class="custom-control-input" id="customColor_blue" checked="" type="checkbox">
+              <input class="custom-control-input" id="customColor_blue" checked="" type="checkbox" name="keep">
               <label class="custom-control-label" for="customColor_blue">Keep me logged in</label>
             </div>
-            <!-- Form Submission Error Message -->
-            <p id="loginErrorCheck"><?php echo $errorCheckResult ?></p>
             <!-- Login Submit Form Button -->
             <div class="text-center pt-4">
-              <button type="submit" id="customButton" class="btn btn-primary">Login</button>
+              <button type="submit" name="submit" id="customButton" class="btn btn-primary">Login</button>
             </div>
             <!-- Forgot Password Button (Links to forgotpwd.php) -->
             <div class="text-center pt-2">
@@ -62,7 +60,7 @@
 
         <!-- Register Tab Content -->
         <div class="tab-pane fade" id="loginRegister" role="tabpanel">
-          <form action="<?php echo DIR ?>controller/process_login.php" method="post">
+          <form action="<?php echo DIR ?>controller/process_register.php" method="post">
             <!-- First Name Input Field -->
             <div class="form-group">
               <input type="text" name="firstname" id="firstname" class="form-control" placeholder="First Name" required autofocus>
@@ -87,8 +85,6 @@
             <div class="form-group">
               <input type="password" name="passwordConfirm" id="passwordConfirm" class="form-control" placeholder="Confirm password" required>
             </div>
-            <!-- Form Submission Error Message -->
-            <p id="loginErrorCheck"><?php echo $errorCheckResult ?></p>
             <!-- Register Submit Form Button -->
             <div class="text-center pt-2 pb-1">
               <button type="submit" name="submit" id="customButton" class="btn btn-primary">Register</button>

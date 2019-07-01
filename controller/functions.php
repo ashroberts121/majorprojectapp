@@ -1,9 +1,24 @@
 <?php
+
 	/*********************************************/
     //Check if email already exists in database
 	function email_exists($email, $conn){
 
 		$sql = "SELECT id FROM users WHERE email='$email'";
+		$result = $conn->query($sql);
+
+		if(mysqli_num_rows($result) == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	/*********************************************/
+    //Check if email already exists in database
+	function user_exists($username, $conn){
+
+		$sql = "SELECT id FROM users WHERE username='$username'";
 		$result = $conn->query($sql);
 
 		if(mysqli_num_rows($result) == 1){
@@ -23,6 +38,5 @@
 			return false;
 		}
 	}
-
 
 ?>
