@@ -2,7 +2,8 @@
 <html>
   <head>
   <meta charset="UTF-8">
-  <title> <?php echo DIR; ?> </title>
+  <!-- Display Website Title from config -->
+  <title> <?php echo SITE_TITLE ?> </title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1"><!--Set viewport-->
 
@@ -22,6 +23,22 @@
     <body>
       <div id="headerLogoBar" class="col-12">
         <div class="col-2 offset-5">
-          <img src="../assets/img/fitness_logo.png" height="28px" width="auto" />
+          <a href="<?php echo DIR ?>">
+            <img src="../assets/img/fitness_logo.png" height="28px" width="auto" />
+          </a>
+          <?php
+            if(logged_in()){
+              //assign variable for session value
+              $email = mysqli_real_escape_string($conn, $_SESSION['email']);
+              //Select logged in users first and last name based on their email
+              $sql = "SELECT username FROM users WHERE email='$email'";
+              $result = $conn->query($sql);
+
+              while($row = $result->fetch_object()){
+                  //Display first and last name of logged in user
+                  echo "$row->username";
+                }
+            }
+          ?>
         </div>
       </div>

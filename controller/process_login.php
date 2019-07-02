@@ -29,9 +29,9 @@
 				//Set email value as session value
 				$_SESSION['email'] = $email;
 
-				//If user checks 'keep me logged in', set cookie to last an hour
+				//If user checks 'keep me logged in', set cookie to last 24h
 				if($keep == "on"){
-					setcookie('email', $email, time()+3600);
+					setcookie('email', $email, time() + 86400, "/");
 				}
 				//Redirect to homepage
         ?>

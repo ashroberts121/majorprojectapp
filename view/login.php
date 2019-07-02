@@ -43,7 +43,7 @@
             </div>
             <!-- Keep Logged in Checkbox Field -->
             <div class="custom-control custom-checkbox">
-              <input class="custom-control-input" id="customColor_blue" checked="" type="checkbox" name="keep">
+              <input class="custom-control-input" id="customColor_blue" checked="on" type="checkbox" name="keep">
               <label class="custom-control-label" for="customColor_blue">Keep me logged in</label>
             </div>
             <!-- Login Submit Form Button -->

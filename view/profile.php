@@ -9,6 +9,29 @@
 
 ?>
 
+<?php
+echo "hello";
+  if(logged_in()){
+    echo "hello";
+    //assign variable for session value
+    $detect_user = mysqli_real_escape_string($conn, $_SESSION['email']);
+    //Select profiles based on their id
+    $sql = "SELECT * FROM profile WHERE email='$detect_user'";
+    $result = $conn->query($sql);
+      echo "hello3";
+    while($row = $result->fetch_object()){
+        //Display first and last name of logged in user
+        echo "hello4";
+        echo "$row->email";
+        echo "$row->username";
+        echo "$row->firstname"." "."$row->surname";
+        echo "$row->gender"."$row->location";
+        echo "$row->job_title";
+
+      }
+
+?>
+
 <!-- Profile Page Container -->
 <div class="col-12" style="padding: 0;">
 
@@ -154,4 +177,6 @@
 
 <?php
   include('../model/footer.php');//Call in footer.php
+
+} //end of if(logged_in())
 ?>
