@@ -191,7 +191,6 @@
 /***************  PROFILE.PHP  ***************/
 
 #profileCoverImage {
-  background-image: url('../img/pushup_man.jpeg');
   background-size: 100% auto;
   height: 200px;
   box-shadow: 0px 8px 6px #D4D4D4;

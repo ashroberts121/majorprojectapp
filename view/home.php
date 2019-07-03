@@ -8,29 +8,30 @@
   include('../view/nav.php');//Call in bottom navbar
 
 ?>
+
+<!-- Page Container -->
 <div class="col-12" style="padding: 0;">
   <div class="row" id="pageContainer">
 
-    <!---------------------------------------------- New Post Card -------------------------------------->
+    <!--//////////////////////////////// New Post Card -------------------------------------->
     <div id="homeNewPostCard" class="card col">
 
       <div class="card-header">
           <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex justify-content-between align-items-center">
-                <div class="h2">New Post..</div>
+                <div class="h3">New Post..</div>
               </div>
           </div>
       </div>
 
       <div class="card-body">
-        <div class="tab-content" id="myTabContent">
-          <div class="tab-pane fade show active" id="posts" role="tabpanel" aria-labelledby="posts-tab">
+        <form class="tab-content" method="post" action="process_new_post" enctype="multipart/form-data">
+          <div class="tab-pane fade show active" id="posts" role="tabpanel">
             <div class="form-group">
-                <label class="sr-only" for="message">post</label>
                 <textarea class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
             </div>
           </div>
-          <div class="tab-pane fade" id="images" role="tabpanel" aria-labelledby="images-tab">
+          <div class="tab-pane fade" id="images" role="tabpanel">
             <div class="form-group">
               <div class="custom-file">
                   <input type="file" class="custom-file-input" id="customFile">
@@ -39,7 +40,7 @@
             </div>
             <div class="py-4"></div>
           </div>
-        </div>
+        </form>
         <div class="btn-toolbar justify-content-between">
           <div class="btn-group">
             <button id="customButton" type="submit" class="btn btn-primary">share</button>
@@ -49,9 +50,9 @@
 
     </div>
 
-    <!---------------------------------------------- End of New Post Card -------------------------------------->
+    <!---///////////////////////////// End of New Post Card -------------------------------------->
 
-    <!------------------------Social Media Post Card------------------------------->
+    <!---/////////////////////////////Social Media Post Card-------------------------------------->
     <div id="homePostCard" class="card">
 
       <!-- Header, poster details -->
@@ -63,7 +64,7 @@
                   </div>
                   <div class="ml-2">
                       <div class="h5 m-0">@Username123</div><!-- Username tag -->
-                      <div class="text-muted">Full Name</div><!-- Name -->
+                      <div class="text-muted mt-2"> <i class="fa fa-clock-o"></i> 10 min ago</div><!-- Post time -->
                   </div>
               </div>
           </div>
@@ -71,7 +72,6 @@
 
       <!-- Body, post content -->
       <div class="card-body">
-          <div class="text-muted mb-2"> <i class="fa fa-clock-o"></i> 10 min ago</div><!-- Post time -->
           <a class="card-link" href="#">
               <h5 class="card-title" id="customPostColor">Post Title (optional)</h5><!-- Post title -->
           </a>
@@ -102,9 +102,9 @@
     <div style="height: 30px;">
       <div id="postDivider"></div>
     </div>
-    <!------------------------------//END OF Social Media Post Card---------------------------->
+    <!--////////////////////////////////// END OF Social Media Post Card---------------------------->
 
-    <!------------------------Social Media Post Card------------------------------->
+    <!--////////////////////////////////// Social Media Post Card------------------------------------>
     <div id="homePostCard" class="card">
 
       <!-- Header, poster details -->
@@ -116,7 +116,7 @@
                   </div>
                   <div class="ml-2">
                       <div class="h5 m-0">@Username123</div><!-- Username tag -->
-                      <div class="text-muted">Full Name</div><!-- Name -->
+                      <div class="text-muted mt-2"> <i class="fa fa-clock-o"></i> 10 min ago</div><!-- Post time -->
                   </div>
               </div>
           </div>
@@ -154,9 +154,9 @@
     <div style="height: 30px;">
       <div id="postDivider"></div>
     </div>
-    <!------------------------------//END OF Social Media Post Card---------------------------->
+    <!--///////////////////////////////// END OF Social Media Post Card ---------------------------->
 
-    <!------------------------Social Media Post Card------------------------------->
+    <!--///////////////////////////////// Social Media Post Card ------------------------------------>
     <div id="homePostCard" class="card">
 
       <!-- Header, poster details -->
@@ -168,7 +168,7 @@
                   </div>
                   <div class="ml-2">
                       <div class="h5 m-0">@Username123</div><!-- Username tag -->
-                      <div class="text-muted">Full Name</div><!-- Name -->
+                      <div class="text-muted mt-2"> <i class="fa fa-clock-o"></i> 10 min ago</div><!-- Post time -->
                   </div>
               </div>
           </div>
@@ -176,7 +176,6 @@
 
       <!-- Body, post content -->
       <div class="card-body">
-          <div class="text-muted mb-2"> <i class="fa fa-clock-o"></i> 10 min ago</div><!-- Post time -->
           <a class="card-link" href="#">
               <h5 class="card-title" id="customPostColor">Post Title (optional)</h5><!-- Post title -->
           </a>
@@ -206,10 +205,11 @@
     <div style="height: 30px;">
       <div id="postDivider"></div>
     </div>
-    <!------------------------------//END OF Social Media Post Card---------------------------->
+
+    <!--////////////////////////////////////// END OF Social Media Post Card ---------------------------->
 
   </div>
-</div>
+</div><!-- End of page Container -->
 
 <?php
   include('../model/footer.php');//Call in footer.php
