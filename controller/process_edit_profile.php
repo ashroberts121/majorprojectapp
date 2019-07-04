@@ -3,7 +3,6 @@
   include('../admin/config.php');//Call in config for db connection
   include('../controller/functions.php');//Call in custom function file
   include('../model/head.php');//Call in head.php for head tags
-  include('../view/nav.php');//Call in bottom navbar
 
 ?>
 

@@ -25,84 +25,51 @@
       </div>
 
       <div class="card-body">
-        <form class="tab-content" method="post" action="process_new_post" enctype="multipart/form-data">
+        <form class="tab-content" method="post" action="<?php echo DIR?>controller/process_new_post.php" enctype="multipart/form-data">
           <div class="tab-pane fade show active" id="posts" role="tabpanel">
-            <div class="form-group">
-                <textarea class="form-control" id="message" rows="3" placeholder="What are you thinking?"></textarea>
+            <!-- Post Title Field (Optional)-->
+            <div class="form-group mb-1">
+              <input type="text" name="title" id="title" class="form-control" placeholder="Post Title (optional)">
+            </div>
+            <!-- Post Message Field -->
+            <div class="form-group mb-1">
+                <textarea class="form-control mb-1" id="message" name="message" rows="3" placeholder="What are you thinking?"></textarea>
+            </div>
+            <!-- Post Tags (optional) -->
+            <div class="form-group mb-1">
+                <input type="text" name="tags" id="tags" class="form-control" placeholder="Tags - Seperated by Commas (optional)">
+            </div>
+            <!-- Post Image (optional) -->
+            <div class="form-group mb-1">
+              <i class="fa fa-camera" style="font-size:1.5rem;margin:5px;" onclick="showUploadImage()"></i>
+              <p id="show_upload_image"></p>
             </div>
           </div>
-          <div class="tab-pane fade" id="images" role="tabpanel">
-            <div class="form-group">
-              <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="customFile">
-                  <label class="custom-file-label" for="customFile">Upload image</label>
-              </div>
+          <div class="btn-toolbar justify-content-between">
+            <div class="btn-group">
+              <button id="customButton" type="submit" name="submit" class="btn btn-primary">Share</button>
             </div>
-            <div class="py-4"></div>
           </div>
         </form>
-        <div class="btn-toolbar justify-content-between">
-          <div class="btn-group">
-            <button id="customButton" type="submit" class="btn btn-primary">share</button>
-          </div>
-        </div>
+
       </div>
 
     </div>
 
     <!---///////////////////////////// End of New Post Card -------------------------------------->
 
-    <!---/////////////////////////////Social Media Post Card-------------------------------------->
-    <div id="homePostCard" class="card">
+    <?php
+    // //assign variable for session value
+    // $detect_user = mysqli_real_escape_string($conn, $_SESSION['email']);
 
-      <!-- Header, poster details -->
-      <div class="card-header">
-          <div class="d-flex justify-content-between align-items-center">
-              <div class="d-flex justify-content-between align-items-center">
-                  <div class="mr-2">
-                      <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt=""><!-- Profile display picture -->
-                  </div>
-                  <div class="ml-2">
-                      <div class="h5 m-0">@Username123</div><!-- Username tag -->
-                      <div class="text-muted mt-2"> <i class="fa fa-clock-o"></i> 10 min ago</div><!-- Post time -->
-                  </div>
-              </div>
-          </div>
-      </div>
+    //Select all posts from database
+    $sql = "SELECT * FROM posts ORDER BY id DESC";
+    $result = $conn->query($sql);
 
-      <!-- Body, post content -->
-      <div class="card-body">
-          <a class="card-link" href="#">
-              <h5 class="card-title" id="customPostColor">Post Title (optional)</h5><!-- Post title -->
-          </a>
-          <p class="card-text"><!-- Post content -->
-              Post Content here. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor sequi
-              fuga quia quaerat cum, obcaecati hic.
-          </p>
-          <img src="<?php echo DIR ?>assets/img/pushup_man.jpeg" width="100%" height="auto" /><!-- Post image -->
-          <div><!-- Post tags -->
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">JavaScript</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Android</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">PHP</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Node.js</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Ruby</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Python</span></a>
-          </div>
-      </div>
+    //Display table rows as objects
+    while($row = $result->fetch_object()){
 
-      <!-- Footer, post controls -->
-      <div class="card-footer">
-        <a href="#" class="card-link" id="customPostColor"><i class="fa fa-thumbs-up"></i> Like</a>
-        <a href="#" class="card-link" id="customPostColor"><i class="fa fa-comment"></i> Comment</a>
-      </div>
-    </div>
-
-    <!-- Post divider -->
-    <div style="height: 30px;">
-      <div id="postDivider"></div>
-    </div>
-    <!--////////////////////////////////// END OF Social Media Post Card---------------------------->
+    ?>
 
     <!--////////////////////////////////// Social Media Post Card------------------------------------>
     <div id="homePostCard" class="card">
@@ -112,11 +79,14 @@
           <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex justify-content-between align-items-center">
                   <div class="mr-2">
-                      <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt=""><!-- Profile display picture -->
+                      <!-- Profile display picture -->
+                      <img class="rounded-circle" width="50px" height="50px" src="<?php echo DIR ?>assets/user_images/<?php echo "$row->display_picture" ?>">
                   </div>
                   <div class="ml-2">
-                      <div class="h5 m-0">@Username123</div><!-- Username tag -->
-                      <div class="text-muted mt-2"> <i class="fa fa-clock-o"></i> 10 min ago</div><!-- Post time -->
+                      <!-- Username tag -->
+                      <div class="h5 m-0">@<?php echo "$row->username" ?></div>
+                      <!-- Post time -->
+                      <div class="text-muted mt-2"> <i class="fa fa-clock-o mr-1"></i><?php echo "$row->post_time" ?></div>
                   </div>
               </div>
           </div>
@@ -124,29 +94,57 @@
 
       <!-- Body, post content -->
       <div class="card-body">
-          <div class="text-muted mb-2"> <i class="fa fa-clock-o"></i> 10 min ago</div><!-- Post time -->
-          <a class="card-link" href="#">
-              <h5 class="card-title" id="customPostColor">Post Title (optional)</h5><!-- Post title -->
-          </a>
-          <p class="card-text"><!-- Post content -->
-              Post Content here. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor sequi
-              fuga quia quaerat cum, obcaecati hic.
+
+          <!-- Post title -->
+          <?php
+            //Check if post has title, hide a>h5 tags if not
+            if(!(($row->title) == '')){
+              ?>
+              <a class="card-link" href="#">
+                  <h5 class="card-title" id="customPostColor"><?php echo "$row->title" ?></h5>
+              </a>
+              <?php
+            };//end of if ?>
+
+          <!-- Post content -->
+          <p class="card-text">
+              <?php echo "$row->message" ?>
           </p>
-          <div><!-- Post tags -->
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">JavaScript</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Android</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">PHP</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Node.js</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Ruby</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Python</span></a>
+
+          <!-- Post image -->
+          <?php
+            //Check if post has image, hide img tag if not
+            if(!(($row->image) == '')){
+              ?>
+              <img src="<?php echo DIR ?>assets/post_images/<?php echo "$row->image"?>"width="100%" height="auto" />
+              <?php
+            };//end of if ?>
+
+          <!-- Post tags -->
+          <div>
+            <?php
+            //Remove whitespace from 'tags' rows
+            trim($row->tags);
+            //Remove commas from 'tags' rows and convert tags into an array
+            $tags = explode(',', $row->tags);
+
+            //Loop through $tags array and display on post
+            foreach($tags as $x => $xvalue){
+              ?>
+              <a href="#"><span class="badge badge-primary" id="customPostBGColor"><?php echo $xvalue?></span></a>
+              <?php
+            } //end of foreach
+          ?>
           </div>
+
       </div>
 
       <!-- Footer, post controls -->
       <div class="card-footer">
-        <a href="#" class="card-link" id="customPostColor"><i class="fa fa-thumbs-up"></i> Like</a>
-        <a href="#" class="card-link" id="customPostColor"><i class="fa fa-comment"></i> Comment</a>
+
+        <a href="#" class="card-link" id="customPostColor"><i class="fa fa-thumbs-up"></i> Like (0)</a>
+        <a href="#" class="card-link" id="customPostColor"><i class="fa fa-comment"></i> Comment (0)</a>
+
       </div>
     </div>
 
@@ -156,61 +154,17 @@
     </div>
     <!--///////////////////////////////// END OF Social Media Post Card ---------------------------->
 
-    <!--///////////////////////////////// Social Media Post Card ------------------------------------>
-    <div id="homePostCard" class="card">
+    <?php
 
-      <!-- Header, poster details -->
-      <div class="card-header">
-          <div class="d-flex justify-content-between align-items-center">
-              <div class="d-flex justify-content-between align-items-center">
-                  <div class="mr-2">
-                      <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt=""><!-- Profile display picture -->
-                  </div>
-                  <div class="ml-2">
-                      <div class="h5 m-0">@Username123</div><!-- Username tag -->
-                      <div class="text-muted mt-2"> <i class="fa fa-clock-o"></i> 10 min ago</div><!-- Post time -->
-                  </div>
-              </div>
-          </div>
-      </div>
+    }//End of while loop
 
-      <!-- Body, post content -->
-      <div class="card-body">
-          <a class="card-link" href="#">
-              <h5 class="card-title" id="customPostColor">Post Title (optional)</h5><!-- Post title -->
-          </a>
-          <p class="card-text"><!-- Post content -->
-              Post Content here. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Quo recusandae nulla rem eos ipsa praesentium esse magnam nemo dolor sequi
-              fuga quia quaerat cum, obcaecati hic.
-          </p>
-          <div><!-- Post tags -->
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">JavaScript</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Android</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">PHP</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Node.js</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Ruby</span></a>
-            <a href="#"><span class="badge badge-primary" id="customPostBGColor">Python</span></a>
-          </div>
-      </div>
+    ?>
 
-      <!-- Footer, post controls -->
-      <div class="card-footer">
-        <a href="#" class="card-link" id="customPostColor"><i class="fa fa-thumbs-up"></i> Like</a>
-        <a href="#" class="card-link" id="customPostColor"><i class="fa fa-comment"></i> Comment</a>
-      </div>
-    </div>
-
-    <!-- Post divider -->
-    <div style="height: 30px;">
-      <div id="postDivider"></div>
-    </div>
-
-    <!--////////////////////////////////////// END OF Social Media Post Card ---------------------------->
 
   </div>
 </div><!-- End of page Container -->
 
 <?php
+
   include('../model/footer.php');//Call in footer.php
 ?>
