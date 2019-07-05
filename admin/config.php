@@ -32,4 +32,6 @@
 
   include("../functions.php"); // Include functions file
 
+  date_default_timezone_set('Europe/London'); //Set timezone to GMT
+
 ?>

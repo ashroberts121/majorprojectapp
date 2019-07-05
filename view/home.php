@@ -54,113 +54,11 @@
 
     </div>
 
-    <!---///////////////////////////// End of New Post Card -------------------------------------->
+    <!---/////////// End of New Post Card -------------------------------------->
 
-    <?php
-    // //assign variable for session value
-    // $detect_user = mysqli_real_escape_string($conn, $_SESSION['email']);
-
-    //Select all posts from database
-    $sql = "SELECT * FROM posts ORDER BY id DESC";
-    $result = $conn->query($sql);
-
-    //Display table rows as objects
-    while($row = $result->fetch_object()){
-
-    ?>
-
-    <!--////////////////////////////////// Social Media Post Card------------------------------------>
-    <div id="homePostCard" class="card">
-
-      <!-- Header, poster details -->
-      <div class="card-header">
-          <div class="d-flex justify-content-between align-items-center">
-              <div class="d-flex justify-content-between align-items-center">
-                  <div class="mr-2">
-                      <!-- Profile display picture -->
-                      <img class="rounded-circle" width="50px" height="50px" src="<?php echo DIR ?>assets/user_images/<?php echo "$row->display_picture" ?>">
-                  </div>
-                  <div class="ml-2">
-                      <!-- Username tag -->
-                      <div class="h5 m-0">@<?php echo "$row->username" ?></div>
-                      <!-- Post time -->
-                      <div class="text-muted mt-2"> <i class="fa fa-clock-o mr-1"></i><?php echo "$row->post_time" ?></div>
-                  </div>
-              </div>
-          </div>
-      </div>
-
-      <!-- Body, post content -->
-      <div class="card-body">
-
-          <!-- Post title -->
-          <?php
-            //Check if post has title, hide a>h5 tags if not
-            if(!(($row->title) == '')){
-              ?>
-              <a class="card-link" href="#">
-                  <h5 class="card-title" id="customPostColor"><?php echo "$row->title" ?></h5>
-              </a>
-              <?php
-            };//end of if ?>
-
-          <!-- Post content -->
-          <p class="card-text">
-              <?php echo "$row->message" ?>
-          </p>
-
-          <!-- Post image -->
-          <?php
-            //Check if post has image, hide img tag if not
-            if(!(($row->image) == '')){
-              ?>
-              <img src="<?php echo DIR ?>assets/post_images/<?php echo "$row->image"?>"width="100%" height="auto" />
-              <?php
-            };//end of if ?>
-
-          <!-- Post tags -->
-          <div>
-            <?php
-            //Remove whitespace from 'tags' rows
-            trim($row->tags);
-            //Remove commas from 'tags' rows and convert tags into an array
-            $tags = explode(',', $row->tags);
-
-            //Loop through $tags array and display on post
-            foreach($tags as $x => $xvalue){
-              ?>
-              <a href="#"><span class="badge badge-primary" id="customPostBGColor"><?php echo $xvalue?></span></a>
-              <?php
-            } //end of foreach
-          ?>
-          </div>
-
-      </div>
-
-      <!-- Footer, post controls -->
-      <div class="card-footer">
-
-        <a href="#" class="card-link" id="customPostColor"><i class="fa fa-thumbs-up"></i> Like (0)</a>
-        <a href="#" class="card-link" id="customPostColor"><i class="fa fa-comment"></i> Comment (0)</a>
-
-      </div>
-    </div>
-
-    <!-- Post divider -->
-    <div style="height: 30px;">
-      <div id="postDivider"></div>
-    </div>
-    <!--///////////////////////////////// END OF Social Media Post Card ---------------------------->
-
-    <?php
-
-    }//End of while loop
-    ?>
+    <!---/////////// Display All Posts -------------------------------------->
 
 
-    <?php
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        ?>
       <div>
 
       <?php
@@ -168,6 +66,12 @@
       $postsQuery = $conn->query("SELECT
         posts.id,
         posts.title,
+        posts.tags,
+        posts.username,
+        posts.post_time,
+        posts.image,
+        posts.message,
+        posts.display_picture,
         COUNT(post_likes.id) AS likes,
         GROUP_CONCAT(users.username SEPARATOR '|') AS liked_by
 
@@ -180,6 +84,8 @@
         ON post_likes.user_id = users.id
 
         GROUP BY posts.id
+
+        ORDER BY posts.id DESC
       ");
 
       while($row = $postsQuery->fetch_object()){
@@ -188,31 +94,101 @@
       }
 
     //echo '<pre>', print_r($posts, true), '</pre>';
-    foreach($posts as $post){
-        echo $post->title;
-        ?>
-        <a href="<?php echo DIR?>controller/process_post_like.php?type=post&id=<?php echo $post->id ?>">Like</a>
-        <?php
-        echo '<br/>';
-        ?>
-        <p><?php echo $post->likes ?> people liked this</p>
-        <?php if(!empty($post->liked_by)){?>
-          <ul>
-            <?php foreach($post->liked_by as $user){?>
-              <li><?php echo $user; ?></li>
-            <?php } ?>
-          </ul>
-        <?php } ?>
+    foreach($posts as $post){?>
+      <div id="homeNewPostCard">
+        <!-- Header, poster details -->
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="mr-2">
+                        <!-- Profile display picture -->
+                        <img class="rounded-circle" width="50px" height="50px" src="<?php echo DIR ?>assets/user_images/<?php echo "$post->display_picture" ?>">
+                    </div>
+                    <div class="ml-2">
+                        <!-- Username tag -->
+                        <div class="h5 m-0">@<?php echo "$post->username" ?></div>
+                        <!-- Post time -->
+                        <div class="text-muted mt-2"> <i class="fa fa-clock-o mr-1"></i><?php echo "$post->post_time" ?></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <?php
-    }
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    ?>
+        <!-- Body, post content -->
+        <div class="card-body">
+
+            <!-- Post title -->
+            <?php
+              //Check if post has title, only display a tag if it does
+              if(!(($post->title) == '')){
+                ?>
+                <a class="card-link" href="#">
+                    <h5 class="card-title" id="customPostColor"><?php echo "$post->title" ?></h5>
+                </a>
+                <?php
+              };//end of if ?>
+
+            <!-- Post content -->
+            <p class="card-text">
+                <?php echo "$post->message" ?>
+            </p>
+
+            <!-- Post image -->
+            <?php
+              //Check if post has image, hide img tag if not
+              if(!(($post->image) == '')){
+                ?>
+                <img src="<?php echo DIR ?>assets/post_images/<?php echo "$post->image"?>"width="100%" height="auto" />
+                <?php
+              };//end of if ?>
+
+            <!-- Post tags -->
+            <div>
+              <?php
+              //Remove whitespace from 'tags' rows
+              trim($post->tags);
+              //Remove commas from 'tags' rows and convert tags into an array
+              $tags = explode(',', $post->tags);
+
+              //Loop through $tags array and display on post
+              foreach($tags as $x => $xvalue){
+                ?>
+                <a href="#"><span class="badge badge-primary" id="customPostBGColor"><?php echo $xvalue?></span></a>
+              <?php
+              } //end of foreach
+            ?>
+            </div>
+
+        </div>
+
+        <!-- Footer, post controls -->
+        <div class="card-footer">
+          <!-- Like Button -->
+          <a href="<?php echo DIR?>controller/process_post_like.php?type=post&id=<?php echo $post->id ?>" class="card-link" id="customPostColor"><i class="fa fa-thumbs-up"></i> Like</a>
+          <a href="<?php echo DIR?>view/post_liked_by.php?id=<?php echo $post->id ?>">(<?php echo $post->likes ?>)</a>
+
+          <!-- Comment Button -->
+          <a href="#" class="card-link" id="customPostColor"><i class="fa fa-comment"></i> Comment (0)</a>
+
+        </div>
+
+      </div>
+
+      <!-- Post divider -->
+      <div style="height: 30px;">
+        <div id="postDivider"></div>
+      </div>
+    <?php
+    }//end foreach?>
   </div>
 
   </div>
 </div><!-- End of page Container -->
 
+<?php
+//Show full post details array (for testing)
+//echo '<pre>', print_r($posts, true), '</pre>';
+?>
 
 
 <?php

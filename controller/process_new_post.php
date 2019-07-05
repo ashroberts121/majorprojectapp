@@ -20,7 +20,7 @@ if(isset($_POST['submit'])){
   $email = mysqli_real_escape_string($conn, $_SESSION['email']);
 
   //Find username for logged in user
-  $sql = "SELECT * FROM users WHERE email='$email'";
+  $sql = "SELECT * FROM profile WHERE email='$email'";
   $result = $conn->query($sql);
   //Fetch object of username row
   while($row = $result->fetch_object()){
@@ -92,7 +92,7 @@ if(isset($_POST['submit'])){
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Update 'posts' table values based on the logged in user email
 
-    $sql2 = "INSERT INTO posts(title, message, tags, image, email, username, display_picture, post_time) VALUES ('$title', '$message', '$tags', '$fileName', '$email', '$username', '$display_picture', '$post_time')";
+    $sql2 = "INSERT INTO posts(title, message, tags, image, email, username, display_picture, post_time, likes) VALUES ('$title', '$message', '$tags', '$fileName', '$email', '$username', '$display_picture', '$post_time', '0')";
     $result2 = $conn->query($sql2);
     echo $username;
     //Redirect to profile

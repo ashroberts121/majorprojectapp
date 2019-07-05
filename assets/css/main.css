@@ -4,6 +4,9 @@
 
 
 /****************** NONE PAGE SPECIFIC STYLES**********************/
+* {
+  box-sizing: border-box;
+}
 
 #pageContainer {
   width: 100%;
@@ -126,6 +129,7 @@
   padding: 0;
   margin: 10px;
   box-shadow: -1px 5px 20px #EFEFEF;
+  border: 1px solid #D4D4D4;
 }
 
 #homePostCard {
