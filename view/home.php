@@ -69,6 +69,7 @@
         posts.tags,
         posts.username,
         posts.post_time,
+        posts.email,
         posts.image,
         posts.message,
         posts.display_picture,
@@ -170,6 +171,15 @@
           <!-- Comment Button -->
           <a href="#" class="card-link" id="customPostColor"><i class="fa fa-comment"></i> Comment (0)</a>
 
+          <!-- Delete Post if logged in as post author -->
+          <?php
+            if(($_SESSION['email']) == ($post->email)){
+              ?>
+              <a href="<?php echo DIR; ?>controller/process_delete_post.php?id=<?php echo $post->id; ?>" id="homeDeletePost">Delete</a>
+              <?php
+            }//end if
+
+          ?>
         </div>
 
       </div>
