@@ -10,7 +10,7 @@
 		//Check if email is in database
 		if(email_exists($email, $conn)){
 			//$errorCheckResult = "Email exists";
-			$sql = "SELECT password FROM users WHERE email='$email'";
+			$sql = "SELECT * FROM users WHERE email='$email'";
 			$result = $conn->query($sql);
 
 			//Retrieve password column from database
@@ -25,9 +25,20 @@
           </script>
         <?php
 			}else{
+        //Re-select rows from user table for logged in user
+        $sql = "SELECT * FROM users WHERE email='$email'";
+  			$result = $conn->query($sql);
+        //Set id variable for logged in user
+        $id = $result->fetch_object()->id;
 
-				//Set email value as session value
+				//Set session for user email
 				$_SESSION['email'] = $email;
+        //Set session for user id
+        $_SESSION['id'] = $id;
+
+        echo $_SESSION['id'];
+        echo '<br />';
+        echo $_SESSION['email'];
 
 				//If user checks 'keep me logged in', set cookie to last 24h
 				if($keep == "on"){

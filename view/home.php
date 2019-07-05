@@ -6,13 +6,11 @@
   include('../controller/functions.php');//Call in custom function file
   include('../model/head.php');//Call in head.php for head tags
   include('../view/nav.php');//Call in bottom navbar
-
 ?>
 
 <!-- Page Container -->
 <div class="col-12" style="padding: 0;">
   <div class="row" id="pageContainer">
-
     <!--//////////////////////////////// New Post Card -------------------------------------->
     <div id="homeNewPostCard" class="card col">
 
@@ -157,12 +155,65 @@
     <?php
 
     }//End of while loop
-
     ?>
 
 
+    <?php
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ?>
+      <div>
+
+      <?php
+
+      $postsQuery = $conn->query("SELECT
+        posts.id,
+        posts.title,
+        COUNT(post_likes.id) AS likes,
+        GROUP_CONCAT(users.username SEPARATOR '|') AS liked_by
+
+        FROM posts
+
+        LEFT JOIN post_likes
+        ON posts.id = post_likes.post_id
+
+        LEFT JOIN users
+        ON post_likes.user_id = users.id
+
+        GROUP BY posts.id
+      ");
+
+      while($row = $postsQuery->fetch_object()){
+        $row->liked_by = $row->liked_by ? explode('|', $row->liked_by) : [];
+        $posts[] = $row;
+      }
+
+    //echo '<pre>', print_r($posts, true), '</pre>';
+    foreach($posts as $post){
+        echo $post->title;
+        ?>
+        <a href="<?php echo DIR?>controller/process_post_like.php?type=post&id=<?php echo $post->id ?>">Like</a>
+        <?php
+        echo '<br/>';
+        ?>
+        <p><?php echo $post->likes ?> people liked this</p>
+        <?php if(!empty($post->liked_by)){?>
+          <ul>
+            <?php foreach($post->liked_by as $user){?>
+              <li><?php echo $user; ?></li>
+            <?php } ?>
+          </ul>
+        <?php } ?>
+
+        <?php
+    }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ?>
+  </div>
+
   </div>
 </div><!-- End of page Container -->
+
+
 
 <?php
 
