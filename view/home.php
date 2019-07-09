@@ -64,6 +64,7 @@
       <?php
 
       $postsQuery = $conn->query("SELECT
+        -- Select rows from 'posts' table
         posts.id,
         posts.title,
         posts.tags,
@@ -73,7 +74,9 @@
         posts.image,
         posts.message,
         posts.display_picture,
+        -- Count 'post like' rows, display as likes in 'posts' table
         COUNT(post_likes.id) AS likes,
+        -- Group users by username, display as 'liked by'
         GROUP_CONCAT(users.username SEPARATOR '|') AS liked_by
 
         FROM posts
@@ -90,12 +93,16 @@
       ");
 
       while($row = $postsQuery->fetch_object()){
+        //Seperate grouped 'liked by' lists, remove bar and convert to array
         $row->liked_by = $row->liked_by ? explode('|', $row->liked_by) : [];
         $posts[] = $row;
       }
 
-    //echo '<pre>', print_r($posts, true), '</pre>';
+    //echo '<pre>', print_r($posts, true), '</pre>'; // CODE TO PRINT ARRAY FOR TESTING
+
+
     foreach($posts as $post){?>
+
       <div id="homeNewPostCard">
         <!-- Header, poster details -->
         <div class="card-header">
@@ -169,8 +176,8 @@
           <a href="<?php echo DIR?>view/post_liked_by.php?id=<?php echo $post->id ?>">(<?php echo $post->likes ?>)</a>
 
           <!-- Comment Button -->
-          <a href="#" class="card-link" id="customPostColor"><i class="fa fa-comment"></i> Comment (0)</a>
-
+          <!-- Fetch comment table and count row number -->
+          <a href="<?php echo DIR?>view/post_comment.php?type=post&id=<?php echo $post->id?>" class="card-link" id="customPostColor"><i class="fa fa-comment"></i> Comment</a>
           <!-- Delete Post if logged in as post author -->
           <?php
             if(($_SESSION['email']) == ($post->email)){
@@ -196,12 +203,5 @@
 </div><!-- End of page Container -->
 
 <?php
-//Show full post details array (for testing)
-//echo '<pre>', print_r($posts, true), '</pre>';
-?>
-
-
-<?php
-
   include('../model/footer.php');//Call in footer.php
 ?>

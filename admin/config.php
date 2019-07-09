@@ -21,7 +21,7 @@
 
   //Attach root to DIR and $DIR variable
   define('DIR', 'http://localhost/MajorProjectApp/');
-  $DIR = 'http://localhost/MajorProjectApp';
+  $DIR = 'http://localhost/MajorProjectApp/';
   //Attach admin to DIR_ADMIN and $DIR_ADMIN variable
   define('DIR_ADMIN', 'http://localhost/MajorProjectApp/admin/');
   $DIR_ADMIN = 'http://localhost/MajorProjectApp/admin/';
@@ -32,6 +32,6 @@
 
   include("../functions.php"); // Include functions file
 
-  date_default_timezone_set('Europe/London'); //Set timezone to GMT
+  date_default_timezone_set('Europe/London'); //Set timezone to London Timezone
 
 ?>

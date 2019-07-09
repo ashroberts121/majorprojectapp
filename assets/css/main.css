@@ -242,3 +242,15 @@
 /************  END OF LOGIN.PHP  ***********/
 
 /********************************************************************************************/
+
+/************  POST_COMMENT.PHP  ***********/
+
+#newCommentCard {
+  border-radius: 0;
+  padding: 0;
+  margin: 10px;
+  box-shadow: -1px 5px 20px #EFEFEF;
+  border: 1px solid #D4D4D4;
+}
+
+/************  END OF POST_COMMENT.PHP  ***********/
