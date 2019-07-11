@@ -11,10 +11,28 @@
 <!--Login Page Container-->
 <div class="container mt-2">
   <div class="card mx-auto border-0">
+    <?php
+    $id = $_SESSION['id'];
+    $sql = $conn->query("SELECT * FROM users WHERE id='$id'");
+      ?>
+      <div class="col-12" style="text-align: center;">
+        <?php
+        if(!(logged_in())){ ?>
+          <p class="m-0 mt-1" style="color:red;">Please login or register</p>
+        <?php
+        }else{
+          while($row = $sql->fetch_object()){ ?>
+            <p class="m-0 mt-1">You are logged in as <?php echo $row->username ?></p>
+            <a href="<?php echo DIR?>controller/process_logout.php"><p class="m-0">Log out?</p></a>
+            <?php
+          }//End while ?>
+        </div>
+        <?php
+        }//End if else ?>
 
     <!-- Login Card Header -->
     <div class="card-header border-bottom-0 bg-transparent">
-      <ul class="nav nav-tabs justify-content-center pt-4" id="" role="tablist">
+      <ul class="nav nav-tabs justify-content-center pt-2" id="" role="tablist">
         <!-- Login Tab -->
         <li class="nav-item">
           <a class="nav-link active text-primary" data-toggle="pill" href="#loginLogin" role="tab">Login</a>

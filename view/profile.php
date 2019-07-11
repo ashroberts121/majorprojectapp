@@ -10,6 +10,7 @@
 ?>
 
 <?php
+
   //Check if a user is logged in and display their profile details
   if(logged_in()){
 

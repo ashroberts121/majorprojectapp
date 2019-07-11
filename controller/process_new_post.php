@@ -92,7 +92,8 @@ if(isset($_POST['submit'])){
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Update 'posts' table values based on the logged in user email
 
-    $sql2 = "INSERT INTO posts(title, message, tags, image, email, username, display_picture, post_time, likes) VALUES ('$title', '$message', '$tags', '$fileName', '$email', '$username', '$display_picture', '$post_time', '0')";
+    $sql2 = "INSERT INTO posts(title, message, tags, image, email, username, display_picture, post_time, likes, comments)
+              VALUES ('$title', '$message', '$tags', '$fileName', '$email', '$username', '$display_picture', '$post_time', '0', '0')";
     $result2 = $conn->query($sql2);
     //Redirect to profile
     ?>

@@ -36,13 +36,13 @@
         //Set session for user id
         $_SESSION['id'] = $id;
 
-        echo $_SESSION['id'];
-        echo '<br />';
-        echo $_SESSION['email'];
+        // echo $_SESSION['id'];
+        // echo '<br />';
+        // echo $_SESSION['email'];
 
 				//If user checks 'keep me logged in', set cookie to last 24h
 				if($keep == "on"){
-					setcookie('email', $email, time() + 86400, "/");
+					setcookie('email', $email, time() + 86400, "/MajorProjectApp");
 				}
 				//Redirect to homepage
         ?>

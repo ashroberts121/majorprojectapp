@@ -103,11 +103,11 @@
 			$sql_users = "INSERT INTO users(id, firstname, surname, username, email, password, token) VALUES (NULL, '$firstname', '$surname', '$username', '$email', '$password', '')";
 			$sql_profile = "INSERT INTO profile(id, email, firstname, surname, username, gender, location, job_title, display_picture, background_picture) VALUES (NULL, '$email', '$firstname', '$surname', '$username', '(Gender)', '(Location)', '(Job Title)', 'defaultdp.jpg', 'defaultbgp.jpeg')";
 			if((mysqli_query($conn, $sql_users)) && (mysqli_query($conn, $sql_profile))){
-        ?>
+					?>
     			<script>
             //Alert to show successful user creation, redirects to login.php
     				alert('Successfully registered!');
-    				window.location = "<?php echo DIR?>view/login.php";
+    				window.location = "<?php echo DIR?>view/profile.php";
     			</script>
     		<?php
 			}
