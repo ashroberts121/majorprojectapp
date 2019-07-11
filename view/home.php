@@ -11,13 +11,19 @@
 <!-- Page Container -->
 <div class="col-12" style="padding: 0;">
   <div class="row" id="pageContainer">
+
+    <?php
+    //Show new post box if logged in
+    if(logged_in()){
+
+    ?>
     <!--//////////////////////////////// New Post Card -------------------------------------->
     <div id="homeNewPostCard" class="card col">
 
       <div class="card-header">
           <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex justify-content-between align-items-center">
-                <div class="h3">New Post..</div>
+                <div class="h5">Post to Main Feed</div>
               </div>
           </div>
       </div>
@@ -52,7 +58,10 @@
 
       </div>
 
-    </div>
+    </div><!-- div#homeNewPostCard -->
+    <?php
+    }//end if logged in
+    ?>
 
     <!---/////////// End of New Post Card -------------------------------------->
 
@@ -74,6 +83,7 @@
         posts.image,
         posts.message,
         posts.display_picture,
+        posts.comments,
         -- Count 'post like' rows, display as likes in 'posts' table
         COUNT(post_likes.id) AS likes,
         -- Group users by username, display as 'liked by'
@@ -176,8 +186,7 @@
           <a href="<?php echo DIR?>view/post_liked_by.php?id=<?php echo $post->id ?>">(<?php echo $post->likes ?>)</a>
 
           <!-- Comment Button -->
-          <!-- Fetch comment table and count row number -->
-          <a href="<?php echo DIR?>view/post_comment.php?type=post&id=<?php echo $post->id?>" class="card-link" id="customPostColor"><i class="fa fa-comment"></i> Comment</a>
+          <a href="<?php echo DIR?>view/post_comment.php?type=post&id=<?php echo $post->id?>" class="card-link" id="customPostColor"><i class="fa fa-comment"></i> Comment (<?php echo $post->comments ?>)</a>
           <!-- Delete Post if logged in as post author -->
           <?php
             if(($_SESSION['email']) == ($post->email)){
@@ -185,7 +194,6 @@
               <a href="<?php echo DIR; ?>controller/process_delete_post.php?id=<?php echo $post->id; ?>" id="homeDeletePost">Delete</a>
               <?php
             }//end if
-
           ?>
         </div>
 

@@ -165,6 +165,17 @@
 
 /*************** GROUPS.PHP  **************/
 
+#allGroupsTab {
+  text-align: center;
+}
+
+#allGroupsTab a button {
+  background-color: #639EFB;
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 10px;
+}
+
 #groupsGroupCard {
   height: auto;
   text-align: center;
@@ -191,6 +202,20 @@
   background-color: #639EFB;
   border-radius: 0;
   border: 0;
+}
+
+#newGroupCard {
+  border-radius: 0;
+  padding: 0;
+  margin: 10px;
+  box-shadow: -1px 5px 20px #EFEFEF;
+  border: 1px solid #D4D4D4;
+}
+
+#groupDeletePost {
+  float:right;
+  color:red;
+  position: absolute;
 }
 
 /************  END OF GROUPS.PHP  ***********/
@@ -254,3 +279,58 @@
 }
 
 /************  END OF POST_COMMENT.PHP  ***********/
+
+/********************************************************************************************/
+
+/************  GROUP_POSTS.PHP  ***********/
+
+
+#groupNewPostCard {
+  border-radius: 0;
+  padding: 0;
+  margin: 10px;
+  box-shadow: -1px 5px 20px #EFEFEF;
+  border: 1px solid #D4D4D4;
+}
+
+#groupPostCard {
+  border-radius: 0;
+}
+
+#postDivider {
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  margin:10px 0 0 -5px;
+  left: 50%;
+  position: absolute;
+  background-color: #639EFB;
+}
+
+#customPostColor {
+  color: #639EFB;
+}
+
+#customPostBGColor {
+  background-color: #639EFB;
+}
+
+#groupDeletePost {
+  float:right;
+  color:red;
+}
+
+#groupPageJoinButton {
+  text-align: center;
+}
+
+#groupPageJoinButton a button {
+  background-color: #639EFB;
+  border-radius: 0;
+  border: 0.5px solid #639EFB;
+  margin: 10px 0;
+}
+
+/************  END OF GROUP_POSTS.PHP  ***********/
+
+/********************************************************************************************/

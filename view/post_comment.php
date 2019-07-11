@@ -45,26 +45,26 @@
       <ul class="list-group list-group-flush">
         <?php
         $post_id = $_GET['id'];
-
         //Select all rows from post_comments table
-        $comments = $conn->query("SELECT * FROM post_comments WHERE post_id = '$post_id' ORDER BY id DESC");
-
+        $sql = $conn->query("SELECT * FROM post_comments WHERE post_id = '$post_id' ORDER BY id DESC");
         //Display content as objects if post_comments has rows
-        while($row = $comments->fetch_object()){
-
-          ?>
-          <li class="list-group-item">
-              <!-- Username tag -->
-              <div class="h6 m-0">@<?php echo "$row->username" ?></div>
-              <!-- Post time -->
-              <div class="text-muted"> <i class="fa fa-clock-o mr-1"></i><?php echo "$row->comment_time" ?></div>
-
-              <!-- Post content -->
-              <p class="card-text"><?php echo "$row->comment" ?></p>
-          </li>
-
-        <?php
-        }//End of while
+        while($row = $sql->fetch_object()){
+          $comments[] = $row;
+        }
+        //Check if there are comments for post and display as such
+        if (empty($comments)) {
+            echo "No comments yet";
+        } else {
+            foreach ($comments as $comment) {
+              ?>
+              <li class="list-group-item">
+                 <div class="h6 m-0">@<?php echo "$comment->username" ?></div>
+                 <div class="text-muted"> <i class="fa fa-clock-o mr-1"></i><?php echo "$comment->comment_time" ?></div>
+                 <p class="card-text"><?php echo "$comment->comment" ?></p>
+              </li>
+              <?php
+            }
+        }
         ?>
       </ul>
     </div><!--end of div.col -->

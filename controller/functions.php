@@ -29,6 +29,34 @@
 	}
 
 	/*********************************************/
+  //Check if user has joined group
+	function group_member_exists($email, $id, $conn){
+
+		$sql = "SELECT * FROM group_members WHERE user_email='$email' AND group_id='$id'";
+		$result = $conn->query($sql);
+
+		if(mysqli_num_rows($result) == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	/*********************************************/
+  //Check if there are comments related to post via post id
+	function comment_exists($post_id, $conn){
+
+		$sql = "SELECT * FROM post_comments WHERE post_id='$post_id'";
+		$result = $conn->query($sql);
+
+		if(mysqli_num_rows($result) > 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	/*********************************************/
     //Check to see if user is logged in (active session or cookie)
 	function logged_in(){
 		//check if user is logged in - session or cookie is set
