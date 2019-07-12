@@ -10,10 +10,15 @@
 ?>
 
 <!-- Page Container -->
-<div class="col-12" style="padding: 0;">
+<div class="col-12 p-0">
   <div class="row" id="pageContainer">
 
     <!--//////////////////////////////// New Comment Form -------------------------------------->
+    <?php
+    if(!(logged_in())){
+      echo '<div class="col-12 p-0" style="text-align:center;"><p style="color:red">Please login to comment on posts.</p></div>';
+    }else{
+    ?>
     <!-- New Comment Card -->
     <div id="newCommentCard" class="card col">
 
@@ -40,8 +45,11 @@
         </form>
       </div>
     </div><!-- End of New Comment Card -->
+    <?php
+  }//End if else logged in
+    ?>
 
-    <div class="col-12">
+    <div class="col-12 p-0">
       <ul class="list-group list-group-flush">
         <?php
         $post_id = $_GET['id'];
@@ -55,12 +63,22 @@
         if (empty($comments)) {
             echo "No comments yet";
         } else {
+            $commentAuthor = $comment->id;
+            $id = $_SESSION['id'];
+            // $commentUser = $conn->query("SELECT * FROM post_comments WHERE id = '$commentAuthor'");
             foreach ($comments as $comment) {
               ?>
               <li class="list-group-item">
                  <div class="h6 m-0">@<?php echo "$comment->username" ?></div>
                  <div class="text-muted"> <i class="fa fa-clock-o mr-1"></i><?php echo "$comment->comment_time" ?></div>
                  <p class="card-text"><?php echo "$comment->comment" ?></p>
+                 <?php
+                 if(!($id == $commentAuthor)){
+
+                 }else{
+                   echo 'DELETE';
+                 }
+                 ?>
               </li>
               <?php
             }

@@ -10,7 +10,7 @@
 ?>
 <div class="col-12" style="padding: 0;">
   <div class="row" id="pageContainer">
-    <div class="col-12" id="groupPageJoinButton">
+    <div class="col-12 p-0" id="groupPageJoinButton">
       <?php
       //Assign logged in user to $email
       $email = $_SESSION['email'];
@@ -18,74 +18,77 @@
       $group_id = $_GET['id'];
       $name = $_GET['name'];
 
+      if(!(logged_in())){
 
-      //Only give posting capabilities to group members (check logged in user)
-      if(!(group_member_exists($email, $group_id, $conn))){ ?>
-        <a href="<?php echo DIR;?>controller/process_join_group.php?id=<?php echo $group_id;?>&name=<?php echo $name;?>"><button type="button" class="btn btn-secondary">Join</button></a>
-        <?php
       }else{
-      ?>
+        //Only give posting capabilities to group members (check logged in user)
+        if(!(group_member_exists($email, $group_id, $conn))){ ?>
+          <a href="<?php echo DIR;?>controller/process_join_group.php?id=<?php echo $group_id;?>&name=<?php echo $name;?>"><button type="button" class="btn btn-secondary">Join</button></a>
+          <?php
+        }else{
+        ?>
 
-      <a href="<?php echo DIR;?>controller/process_leave_group.php?id=<?php echo $group_id;?>&name=<?php echo $name;?>"><button type="button" class="btn btn-secondary" style="background-color:white;color:#639EFB">Joined ✓</button></a>
+        <a href="<?php echo DIR;?>controller/process_leave_group.php?id=<?php echo $group_id;?>&name=<?php echo $name;?>"><button type="button" class="btn btn-secondary" style="background-color:white;color:#639EFB">Joined ✓</button></a>
 
-      <!-- Delete group option if logged in as group author -->
-      <?php
-        $sql = $conn->query("SELECT * FROM groups WHERE id='$group_id'");
-        while($row = $sql->fetch_object()){
-          $author = $row->author_id;
-          if($id == $author){
-            ?><a href="<?php echo DIR;?>controller/process_delete_group.php?id=<?php echo $group_id;?>&name=<?php echo $name;?>"><p class="m-0" style="color: red;padding: 2px 4px;">Delete Group</p></a><?php
-          }//end if
-        }
-      ?>
-    </div>
-    <!-- Post form -->
-    <div id="groupNewPostCard" class="card col">
+        <!-- Delete group option if logged in as group author -->
+        <?php
+          $sql = $conn->query("SELECT * FROM groups WHERE id='$group_id'");
+          while($row = $sql->fetch_object()){
+            $author = $row->author_id;
+            if($id == $author){
+              ?><a href="<?php echo DIR;?>controller/process_delete_group.php?id=<?php echo $group_id;?>&name=<?php echo $name;?>"><p class="m-0" style="color: red;padding: 2px 4px;">Delete Group</p></a><?php
+            }//end if
+          }
+        ?>
+      </div>
+      <!-- Post form -->
+      <div id="groupNewPostCard" class="card col">
 
-      <div class="card-header">
-          <div class="d-flex justify-content-between align-items-center">
-              <div class="d-flex justify-content-between align-items-center">
-                <div class="h5">Post to '<?php echo $_GET['name']?>'</div>
+        <div class="card-header">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="h5">Post to '<?php echo $_GET['name']?>'</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+          <form class="tab-content" method="post" action="<?php echo DIR?>controller/process_new_group_post.php" enctype="multipart/form-data">
+            <div class="tab-pane fade show active" id="posts" role="tabpanel">
+              <!-- Post Title Field-->
+              <div class="form-group mb-1">
+                <input type="text" name="title" id="title" class="form-control" placeholder="Post Title (optional)">
               </div>
-          </div>
-      </div>
+              <!-- Post Message Field -->
+              <div class="form-group mb-1">
+                  <textarea class="form-control mb-1" id="message" name="message" rows="3" placeholder="What are you thinking?"></textarea>
+              </div>
+              <!-- Post Image (optional) -->
+              <div class="form-group mb-1">
+                <i class="fa fa-camera" style="font-size:1.5rem;margin:5px;" onclick="showUploadImage()"></i>
+                <p id="show_upload_image"></p>
+              </div>
+              <!-- Post ID Field (Hidden from user) -->
+              <div>
+                <input style="display:none;" id="post_id" name="post_id" value="<?php echo $_GET['id']; ?>"/>
+              </div>
+              <!-- Post Name Field (Hidden from user | for redirection purposes) -->
+              <div>
+                <input style="display:none;" id="post_name" name="post_name" value="<?php echo $_GET['name']; ?>"/>
+              </div>
+            </div>
+            <div class="btn-toolbar justify-content-between">
+              <div class="btn-group">
+                <button id="customButton" type="submit" name="submit" class="btn btn-primary">Share</button>
+              </div>
+            </div>
+          </form>
+        </div>
 
-      <div class="card-body">
-        <form class="tab-content" method="post" action="<?php echo DIR?>controller/process_new_group_post.php" enctype="multipart/form-data">
-          <div class="tab-pane fade show active" id="posts" role="tabpanel">
-            <!-- Post Title Field-->
-            <div class="form-group mb-1">
-              <input type="text" name="title" id="title" class="form-control" placeholder="Post Title (optional)">
-            </div>
-            <!-- Post Message Field -->
-            <div class="form-group mb-1">
-                <textarea class="form-control mb-1" id="message" name="message" rows="3" placeholder="What are you thinking?"></textarea>
-            </div>
-            <!-- Post Image (optional) -->
-            <div class="form-group mb-1">
-              <i class="fa fa-camera" style="font-size:1.5rem;margin:5px;" onclick="showUploadImage()"></i>
-              <p id="show_upload_image"></p>
-            </div>
-            <!-- Post ID Field (Hidden from user) -->
-            <div>
-              <input style="display:none;" id="post_id" name="post_id" value="<?php echo $_GET['id']; ?>"/>
-            </div>
-            <!-- Post Name Field (Hidden from user | for redirection purposes) -->
-            <div>
-              <input style="display:none;" id="post_name" name="post_name" value="<?php echo $_GET['name']; ?>"/>
-            </div>
-          </div>
-          <div class="btn-toolbar justify-content-between">
-            <div class="btn-group">
-              <button id="customButton" type="submit" name="submit" class="btn btn-primary">Share</button>
-            </div>
-          </div>
-        </form>
-      </div>
-
-    </div><!-- div#groupNewPostCard -->
-    <?php
-  }//end if else(group_member_exists)
+      </div><!-- div#groupNewPostCard -->
+      <?php
+    }//end if else(group_member_exists)
+}//end if else (logged in)
     ?>
 
 
