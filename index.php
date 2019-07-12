@@ -20,6 +20,7 @@
   <img id="splashscreenLogo" src="<?php echo DIR ?>assets/img/fitness_logo.png" height="80px;" width="auto;">
 
   <script>
+    alert('Please view on a mobile device for best experience :)');
     //Sets a timer for splashscreen to redirect to home.php after 6 secs
     var timer = setTimeout(
       function() {
