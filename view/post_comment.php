@@ -11,6 +11,7 @@
 
 <!-- Page Container -->
 <div class="col-12 p-0">
+  <div class="col-3 mt-2"><a href="<?php echo DIR;?>view/home.php"><i class="fa fa-chevron-left fa-1x" style="color:#639EFB"> Back</i></a></div>
   <div class="row" id="pageContainer">
 
     <!--//////////////////////////////// New Comment Form -------------------------------------->
