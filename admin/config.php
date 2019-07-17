@@ -23,8 +23,8 @@
   define('DIR', 'http://localhost/MajorProjectApp/');
   $DIR = 'http://localhost/MajorProjectApp/';
   //Attach admin to DIR_ADMIN and $DIR_ADMIN variable
-  define('DIR_ADMIN', 'http://localhost/MajorProjectApp/admin/');
-  $DIR_ADMIN = 'http://localhost/MajorProjectApp/admin/';
+  // define('DIR_ADMIN', 'http://localhost/MajorProjectApp/admin/');
+  // $DIR_ADMIN = 'http://localhost/MajorProjectApp/admin/';
 
   define('SITE_TITLE', 'MajorProjectApp'); //Site title
 
