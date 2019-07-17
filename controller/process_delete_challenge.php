@@ -9,12 +9,20 @@
     //Assign variable to id value
     $deleteChallenge = $_GET['id'];
 
-    //Delete group with selected id
+    //Delete challenge with selected id
     $sql = "DELETE FROM challenges WHERE id='$deleteChallenge'";
     $result = $conn->query($sql);
 
-    //Delete all associated group posts
+    //Delete all associated challlenge posts
     $sql = "DELETE FROM challenge_posts WHERE challenge_id='$deleteChallenge'";
+    $result = $conn->query($sql);
+
+    //Delete all associated challenge members
+    $sql = "DELETE FROM challenge_members WHERE challenge_id='$deleteChallenge'";
+    $result = $conn->query($sql);
+
+    //Delete all associated leaderboard entries
+    $sql = "DELETE FROM challenge_leaderboard WHERE challenge_id='$deleteChallenge'";
     $result = $conn->query($sql);
 
     ?>

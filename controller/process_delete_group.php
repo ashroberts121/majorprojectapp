@@ -17,6 +17,10 @@
     $sql = "DELETE FROM group_posts WHERE group_id='$deleteGroup'";
     $result = $conn->query($sql);
 
+    //Delete all associated group members
+    $sql = "DELETE FROM group_members WHERE group_id='$deleteGroup'";
+    $result = $conn->query($sql);
+
     ?>
       <script>
         alert("Group successfully deleted.");
