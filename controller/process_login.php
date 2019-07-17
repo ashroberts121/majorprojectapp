@@ -58,7 +58,7 @@
       ?>
   			<script>
   				alert('User does not exist. Please try again or register a new account.');
-  				window.location = "<?php echo DIR?>view/login.php";
+  				window.location = "<?php echo DIR?>view/profile.php";
   			</script>
   		<?php
 		}

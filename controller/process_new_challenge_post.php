@@ -14,7 +14,9 @@ if(isset($_POST['submit'])){
   //Declare variables for inputs
   $title = $_POST['title'];
   $message = $_POST['message'];
-  $tags = $_POST['tags'];
+  $post_id = $_POST['post_id'];
+  $post_name = $_POST['post_name'];
+  $author_id = $_SESSION['id'];
 
   //Variable for logged in user via session email
   $email = mysqli_real_escape_string($conn, $_SESSION['email']);
@@ -56,35 +58,35 @@ if(isset($_POST['submit'])){
           if ($fileSize < 10000000) {
 
             //Declare uploaded file destination
-            $fileDestination = '../assets/post_images/'.$fileName;
+            $fileDestination = '../assets/challenge_post_images/'.$fileName;
 
             //Move files to destination folder
             move_uploaded_file($fileTmpName, $fileDestination);
           }else {
-            //Redirect to home
+            //Redirect to challenge_page
             ?>
               <script>
                 alert('Your image was too big (MAX 10MB).');
-                window.location = "<?php echo DIR?>view/home.php";
+                window.location = "<?php echo DIR?>view/challenge_page.php?id=<?php echo $post_id?>&name=<?php echo $post_name?>";
               </script>
             <?php
           }
         }else {
-          //Redirect to home
+          //Redirect to challenge_page
 
           ?>
             <script>
               alert('There was an error uploading the image.');
-              window.location = "<?php echo DIR?>view/home.php";
+              window.location = "<?php echo DIR?>view/challenge_page.php?id=<?php echo $post_id?>&name=<?php echo $post_name?>";
             </script>
           <?php
         }
       }else {
-        //Redirect to home
+        //Redirect to challenge_page
         ?>
           <script>
             alert('Your image must be a jpg, jpeg, png or gif.');
-            window.location = "<?php echo DIR?>view/home.php";
+            window.location = "<?php echo DIR?>view/challenge_page.php?id=<?php echo $post_id?>&name=<?php echo $post_name?>";
           </script>
         <?php
       }
@@ -92,14 +94,13 @@ if(isset($_POST['submit'])){
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Update 'posts' table values based on the logged in user email
 
-    $sql2 = "INSERT INTO posts(title, message, tags, image, email, username, display_picture, post_time, likes, comments)
-              VALUES ('$title', '$message', '$tags', '$fileName', '$email', '$username', '$display_picture', '$post_time', '0', '0')";
+    $sql2 = "INSERT INTO challenge_posts(challenge_id, author_id, title, message, post_image, username, post_time, display_picture) VALUES ('$post_id', '$author_id', '$title', '$message', '$fileName', '$username', '$post_time', '$display_picture')";
     $result2 = $conn->query($sql2);
     //Redirect to profile
     ?>
       <script>
         alert('Successfully posted.');
-        window.location = "<?php echo DIR?>view/home.php";
+        window.location = "<?php echo DIR?>view/challenge_page.php?id=<?php echo $post_id?>&name=<?php echo $post_name?>";
       </script>
     <?php
   }//end of while

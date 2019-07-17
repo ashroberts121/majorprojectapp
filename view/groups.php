@@ -52,7 +52,7 @@
               <img class="card-img-top" src="<?php echo DIR ?>assets/group_bg_images/<?php echo $group->cover_image;?>" alt="Card image cap" width="100%" height="auto">
               <div class="col-8 offset-2">
                 <h4><?php echo $group->name;?></h4>
-                <p><?php echo $group->members;?> Members</p>
+                <p><?php echo $group->members;?> Member(s)</p>
                 <a href="<?php echo DIR;?>view/group_page.php?id=<?php echo $group->id;?>&name=<?php echo $group->name;?>"><button type="button" class="btn btn-secondary">Visit</button></a>
                 <?php
                 if(logged_in()){
@@ -79,9 +79,6 @@
       <!------------------------------- TAB 2 (My Groups), Content ------------------------->
       <div class="tab-pane fade" id="myGroupsTab" role="tabpanel">
         <?php
-        if(!(logged_in())){
-          echo '<p style="color:red">Please login to see your joined groups.</p>';
-        }//End if !logged_in
         $user_id = $_SESSION['id'];
         $sql = $conn->query("SELECT group_id FROM group_members WHERE user_id='$user_id'");
         while($row = $sql->fetch_object()){
@@ -92,7 +89,7 @@
         }else{
           foreach($group_members as $group_member){
             $joined_groups = $group_member->group_id;
-            $sql = $conn->query("SELECT * FROM groups WHERE id='$joined_groups' ORDER BY id ASC");
+            $sql = $conn->query("SELECT * FROM groups WHERE id='$joined_groups' ORDER BY id DESC");
 
             while($row = $sql->fetch_object()){
               ?>
@@ -103,6 +100,7 @@
                   <h4><?php echo $row->name;?></h4>
                   <p><?php echo $row->members;?> Members</p>
                   <a href="<?php echo DIR;?>view/group_page.php?id=<?php echo $row->id;?>&name=<?php echo $row->name;?>"><button type="button" class="btn btn-secondary">Visit</button></a>
+                  <a href="<?php echo DIR;?>controller/process_leave_group.php?id=<?php echo $row->id;?>&name=<?php echo $row->name;?>"><button type="button" class="btn btn-secondary" style="background-color:white;color:#639EFB">Joined ✓</button></a>
                 </div>
               </div>
               <?php

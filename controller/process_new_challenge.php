@@ -12,9 +12,10 @@
 if(isset($_POST['submit'])){
 
   //Declare variables for inputs
-  $title = $_POST['title'];
-  $message = $_POST['message'];
-  $tags = $_POST['tags'];
+  $author_id = $_SESSION['id'];
+  $name = $_POST['name'];
+  $desc = $_POST['desc'];
+  $distance = $_POST['distance'];
 
   //Variable for logged in user via session email
   $email = mysqli_real_escape_string($conn, $_SESSION['email']);
@@ -32,11 +33,11 @@ if(isset($_POST['submit'])){
     $post_time = date('d' . '/' . 'm' . '/' . 'y' . ' @ ' . 'H' . ':' . 'i');
 
     //display picture file properties
-    $fileName = $_FILES['upload_picture']['name'];
-    $fileTmpName = $_FILES['upload_picture']['tmp_name'];
-    $fileSize = $_FILES['upload_picture']['size'];
-    $fileError = $_FILES['upload_picture']['error'];
-    $fileType = $_FILES['upload_picture']['type'];
+    $fileName = $_FILES['cover_image']['name'];
+    $fileTmpName = $_FILES['cover_image']['tmp_name'];
+    $fileSize = $_FILES['cover_image']['size'];
+    $fileError = $_FILES['cover_image']['error'];
+    $fileType = $_FILES['cover_image']['type'];
 
     //Seperate file name into an array
     $fileExt = explode('.', $fileName);
@@ -52,11 +53,11 @@ if(isset($_POST['submit'])){
       if (in_array($fileActualExt, $allowed)) {
         //Check for any file errors
         if ($fileError === 0) {
-          //Check if file meets size requirements (MAX 10MB)
+          //Check if file meets size requirements (10mb)
           if ($fileSize < 10000000) {
 
             //Declare uploaded file destination
-            $fileDestination = '../assets/post_images/'.$fileName;
+            $fileDestination = '../assets/challenge_bg_images/'.$fileName;
 
             //Move files to destination folder
             move_uploaded_file($fileTmpName, $fileDestination);
@@ -92,14 +93,13 @@ if(isset($_POST['submit'])){
     //////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Update 'posts' table values based on the logged in user email
 
-    $sql2 = "INSERT INTO posts(title, message, tags, image, email, username, display_picture, post_time, likes, comments)
-              VALUES ('$title', '$message', '$tags', '$fileName', '$email', '$username', '$display_picture', '$post_time', '0', '0')";
+    $sql2 = "INSERT INTO challenges(author_id, name, cover_image, description, members, distance) VALUES ('$author_id', '$name', '$fileName', '$desc', '0', '$distance')";
     $result2 = $conn->query($sql2);
     //Redirect to profile
     ?>
       <script>
-        alert('Successfully posted.');
-        window.location = "<?php echo DIR?>view/home.php";
+        alert('Successfully created challenge.');
+        window.location = "<?php echo DIR?>view/challenges.php";
       </script>
     <?php
   }//end of while

@@ -54,8 +54,8 @@ if(isset($_POST['submit'])){
       if (in_array($fileActualExt, $allowed)) {
         //Check for any file errors
         if ($fileError === 0) {
-          //Check if file meets size requirements
-          if ($fileSize < 1000000) {
+          //Check if file meets size requirements (MAX 10MB)
+          if ($fileSize < 10000000) {
 
             //Declare uploaded file destination
             $fileDestination = '../assets/group_post_images/'.$fileName;
@@ -66,7 +66,7 @@ if(isset($_POST['submit'])){
             //Redirect to group_page
             ?>
               <script>
-                alert('Your image was too big.');
+                alert('Your image was too big (MAX 10MB).');
                 window.location = "<?php echo DIR?>view/group_page.php?id=<?php echo $post_id?>&name=<?php echo $post_name?>";
               </script>
             <?php

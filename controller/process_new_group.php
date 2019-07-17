@@ -52,8 +52,8 @@ if(isset($_POST['submit'])){
       if (in_array($fileActualExt, $allowed)) {
         //Check for any file errors
         if ($fileError === 0) {
-          //Check if file meets size requirements
-          if ($fileSize < 1000000) {
+          //Check if file meets size requirements (MAX 10MB)
+          if ($fileSize < 10000000) {
 
             //Declare uploaded file destination
             $fileDestination = '../assets/group_bg_images/'.$fileName;
@@ -64,7 +64,7 @@ if(isset($_POST['submit'])){
             //Redirect to home
             ?>
               <script>
-                alert('Your image was too big.');
+                alert('Your image was too big (MAX 10MB).');
                 window.location = "<?php echo DIR?>view/home.php";
               </script>
             <?php

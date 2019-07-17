@@ -1,6 +1,6 @@
 <?php
 
-  $activePage = 'login'; //Sets active page variable for navbar
+  $activePage = 'profile'; //Sets active page variable for navbar
 
   include('../admin/config.php');//Call in config for db connection
   include('../controller/functions.php');//Call in custom function file
@@ -8,9 +8,11 @@
   include('../view/nav.php');//Call in bottom navbar
 
 ?>
-
+<!-- Page Container -->
 <div class="col-8 offset-2">
+
   <h4 style="text-align:center;margin:10px 0;">Update profile</h4>
+  <!-- Form to edit profile detail -->
   <form action="<?php echo DIR ?>controller/process_edit_profile.php" method="post" enctype="multipart/form-data">
 
     <!-- Edit Username Field -->

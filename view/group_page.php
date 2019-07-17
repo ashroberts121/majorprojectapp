@@ -10,7 +10,33 @@
 ?>
 <div class="col-12" style="padding: 0;">
   <div class="row" id="pageContainer">
+
+    <?php
+    //Set variable for get data
+    $group_id = $_GET['id'];
+    $group_name = $_GET['name'];
+    // //Select cover image for page
+    $sql = $conn->query("SELECT * FROM groups WHERE id='$group_id'");
+    while($row = $sql->fetch_object()){
+    ?>
+    <div class="col-12" style="background-image:url('<?php echo DIR?>assets/group_bg_images/<?php echo $row->cover_image?>');background-size:100% auto">
+      <h3 class="pt-4 pb-4" style="text-align:center;color:white;text-shadow:1px 1px 1px grey;"><?php echo $group_name?></h3>
+      <div class="row pb-4" id="challengesPageBanner">
+        <div class="col-3"></div>
+        <div class="col-6" style="text-align:center">
+          <p><?php echo $row->members;?> Member(s)</p>
+        </div>
+        <div class="col-3"></div>
+      </div>
+    </div>
+
     <div class="col-12 p-0" id="groupPageJoinButton">
+      <div class="col-10 offset-1">
+        <p class="mt-1"><?php echo $row->description;?></p>
+      </div>
+
+      <?php }//end while ?>
+
       <?php
       //Assign logged in user to $email
       $email = $_SESSION['email'];
@@ -19,11 +45,11 @@
       $name = $_GET['name'];
 
       if(!(logged_in())){
-
+        echo '<p class="col pt-1" style="color:red;text-align:center">Please login to join this group.</p>';
       }else{
         //Only give posting capabilities to group members (check logged in user)
         if(!(group_member_exists($email, $group_id, $conn))){ ?>
-          <a href="<?php echo DIR;?>controller/process_join_group.php?id=<?php echo $group_id;?>&name=<?php echo $name;?>"><button type="button" class="btn btn-secondary">Join</button></a>
+          <a href="<?php echo DIR;?>controller/process_join_group.php?id=<?php echo $group_id;?>&name=<?php echo $name;?>"><button type="button" class="btn btn-secondary">Join Group</button></a>
           <?php
         }else{
         ?>
@@ -138,7 +164,9 @@
               <?php
                 if(($_SESSION['id']) == ($post->author_id)){
                   ?>
-                  <a href="<?php echo DIR; ?>controller/process_delete_post.php?id=<?php echo $post->id; ?>" id="homeDeletePost">Delete</a>
+                  <div class="pb-1">
+                    <a href="<?php echo DIR; ?>controller/process_delete_group_post.php?id=<?php echo $post->id;?>&groupid=<?php echo $group_id;?>&name=<?php echo $name;?>" id="homeDeletePost">Delete</a>
+                  </div>
                   <?php
                 }//end if
               ?>

@@ -25,7 +25,7 @@
 ?>
 
 <!-- Profile Page Container -->
-<div class="col-12" style="padding: 0;">
+<div class="col-12" style="padding: 0;" id="pageContainer">
 
   <!-- Profile Cover Image -->
   <div class="row" id="profileCoverImage" style="background-image: url(<?php echo DIR.'assets/user_images/'.$row->background_picture?>);"></div>
@@ -91,7 +91,7 @@
               <img class="card-img-top" src="<?php echo DIR ?>assets/group_bg_images/<?php echo $row->cover_image;?>" alt="Card image cap" width="100%" height="auto">
               <div class="col-8 offset-2">
                 <h4><?php echo $row->name;?></h4>
-                <p><?php echo $row->members;?> Members</p>
+                <p><?php echo $row->members;?> Member(s)</p>
                 <a href="<?php echo DIR;?>view/group_page.php?id=<?php echo $row->id;?>&name=<?php echo $row->name;?>"><button type="button" class="btn btn-secondary">Visit</button></a>
                 <a href="<?php echo DIR;?>controller/process_leave_group.php?id=<?php echo $row->id;?>&name=<?php echo $row->name;?>"><button type="button" class="btn btn-secondary" style="background-color:white;color:#639EFB">Joined ✓</button></a>
               </div>
@@ -105,48 +105,40 @@
     </div>
     <!-- End of tab 1 content -->
 
-    <!-- TAB 2 Content, Followed Competitions -->
+    <!-- TAB 2 Content, Followed Challenges -->
     <div class="tab-pane fade" id="profileChallenges" role="tabpanel">
 
-      <!-- Card -->
-      <div class="card" id="groupsGroupCard">
-        <img class="card-img-top" src="<?php echo DIR ?>assets/img/bodybuilding_man.jpeg" alt="Card image cap" width="100%" height="auto">
-        <div class="col-8 offset-2">
-          <h4>Bodybuilding</h4>
-          <p>167K Members</p>
-          <button type="button" class="btn btn-secondary">Visit</button>
-        </div>
-      </div>
+      <?php
+      $user_id = $_SESSION['id'];
+      $sql = $conn->query("SELECT challenge_id FROM challenge_members WHERE user_id='$user_id'");
+      while($row = $sql->fetch_object()){
+        $challenge_members[] = $row;
+      }//end while
+      if(empty($challenge_members)){
+        echo '<p style="color:red">Your joined challenges will appear here.</p>';
+      }else{
+        foreach($challenge_members as $challenge_member){
+          $joined_challenges = $challenge_member->challenge_id;
+          $sql = $conn->query("SELECT * FROM challenges WHERE id='$joined_challenges' ORDER BY id DESC");
 
-      <!-- Card -->
-      <div class="card" id="groupsGroupCard">
-        <img class="card-img-top" src="<?php echo DIR ?>assets/img/weightloss_woman.jpeg" alt="Card image cap" width="100%" height="auto">
-        <div class="col-8 offset-2">
-          <h4>Weight Loss</h4>
-          <p>205K Members</p>
-          <button type="button" class="btn btn-secondary">Visit</button>
-        </div>
-      </div>
-
-      <!-- Card -->
-      <div class="card" id="groupsGroupCard">
-        <img class="card-img-top" src="<?php echo DIR ?>assets/img/runner_woman.jpeg" alt="Card image cap" width="100%" height="auto">
-        <div class="col-8 offset-2">
-          <h4>Running</h4>
-          <p>24K Members</p>
-          <button type="button" class="btn btn-secondary">Visit</button>
-        </div>
-      </div>
-
-      <!-- Card -->
-      <div class="card" id="groupsGroupCard">
-        <img class="card-img-top" src="<?php echo DIR ?>assets/img/yoga_woman.jpeg" alt="Card image cap" width="100%" height="auto">
-        <div class="col-8 offset-2">
-          <h4>Yoga</h4>
-          <p>50K Members</p>
-          <button type="button" class="btn btn-secondary">Visit</button>
-        </div>
-      </div>
+          while($row = $sql->fetch_object()){
+            ?>
+            <!-- Card -->
+            <div class="card" id="challengesChallengeCard">
+              <img class="card-img-top" src="<?php echo DIR ?>assets/challenge_bg_images/<?php echo $row->cover_image;?>" alt="Card image cap" width="100%" height="auto">
+              <div class="col-8 offset-2">
+                <h4><?php echo $row->name;?></h4>
+                <p class="mb-1"><?php echo $row->members;?> Challenger(s)</p>
+                <p class="mb-1">~<?php echo $row->distance;?> Kilometers</p>
+                <a href="<?php echo DIR;?>view/challenge_page.php?id=<?php echo $row->id;?>&name=<?php echo $row->name;?>"><button type="button" class="btn btn-secondary">Visit</button></a>
+                <a href="<?php echo DIR;?>controller/process_leave_challenge.php?id=<?php echo $row->id;?>&name=<?php echo $row->name;?>"><button type="button" class="btn btn-secondary" style="background-color:white;color:#639EFB">Joined ✓</button></a>
+              </div>
+            </div>
+            <?php
+          }//end while
+        }//end foreach
+      }//end if else(empty(challenge_members))
+      ?>
 
     </div>
     <!-- End of tab 2 content -->

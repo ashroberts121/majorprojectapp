@@ -43,6 +43,20 @@
 	}
 
 	/*********************************************/
+  //Check if user has joined challenge
+	function challenge_member_exists($email, $id, $conn){
+
+		$sql = "SELECT * FROM challenge_members WHERE user_email='$email' AND challenge_id='$id'";
+		$result = $conn->query($sql);
+
+		if(mysqli_num_rows($result) == 1){
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	/*********************************************/
   //Check if there are comments related to post via post id
 	function comment_exists($post_id, $conn){
 

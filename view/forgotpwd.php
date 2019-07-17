@@ -7,11 +7,11 @@
 ?>
 
 <!--//////////////// IMPORTANT N0TE // EMAIL RESET LINKS DO NOT WORK FOR LOCALHOST //////////////////////--->
-<!-- This code has been setup to work temporarily without the need for email until no longer on localhost -->
+<!-- This code has been setup to work temporarily without an email being sent. This will be changed when hosted. -->
 
 <!-- Forgot Password Content -->
 <div class="col-8 offset-2 pt-4" id="loginLogin" role="tabpanel">
-
+  <!-- Enter email to use for changing password linked to it -->
   <form action="<?php echo DIR ?>controller/process_forgotpwd.php" method="post">
     <!-- Email Input Field -->
     <div class="form-group">
